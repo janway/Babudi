@@ -67,6 +67,7 @@ BEGIN_MESSAGE_MAP(CBabudiDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BTN_PLAY, &CBabudiDlg::OnBnClickedBtnPlay)
+	ON_BN_CLICKED(IDC_BTN_RUN, &CBabudiDlg::OnBnClickedBtnRun)
 END_MESSAGE_MAP()
 
 
@@ -172,7 +173,6 @@ void CBabudiDlg::OnBnClickedBtnPlay()
 	//
 	parallel_for(size_t(0), size_t(50), [&](size_t i)
 	{
-		//cout << i << ",";
 		//TRACE(_T("%d\n"),i);
 		GetRandom(i);
 	});
@@ -182,8 +182,17 @@ void CBabudiDlg::OnBnClickedBtnPlay()
 
 void CBabudiDlg::GetRandom(size_t i)
 {
-	for (size_t j=0;j<10000;j++)
+	for (size_t j=0;j<10;j++)
 	{
-		TRACE(_T("%d\n"),j*i);
+		TRACE(_T("i=%d,j=%d\n"),i,j);
+	}
+}
+
+
+void CBabudiDlg::OnBnClickedBtnRun()
+{
+	for (size_t i=0;i<50;i++)
+	{
+		GetRandom(i);
 	}
 }
