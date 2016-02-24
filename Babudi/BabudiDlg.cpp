@@ -6,11 +6,15 @@
 #include "Babudi.h"
 #include "BabudiDlg.h"
 #include "afxdialogex.h"
+#include <ppl.h>
+#include <iostream>
+#include <random>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
-
+using namespace concurrency;
+using namespace std;
 
 // CAboutDlg dialog used for App About
 
@@ -156,4 +160,30 @@ HCURSOR CBabudiDlg::OnQueryDragIcon()
 void CBabudiDlg::OnBnClickedBtnPlay()
 {
 	// TODO: Add your control notification handler code here
+	//main();
+	const size_t N = 10;
+	int* a = new int[N];
+
+	for (size_t n = 0; n < N; ++n)
+		a[n] = n;
+	for (size_t n = N; n-- > 0;) // Reverse cycles are tricky for unsigned types.
+		TRACE(_T("%d \n"),a[n]);
+	delete[] a;
+	//
+	parallel_for(size_t(0), size_t(50), [&](size_t i)
+	{
+		//cout << i << ",";
+		//TRACE(_T("%d\n"),i);
+		GetRandom(i);
+	});
+	//cout << endl;
+	TRACE("end");
+}
+
+void CBabudiDlg::GetRandom(size_t i)
+{
+	for (size_t j=0;j<10000;j++)
+	{
+		TRACE(_T("%d\n"),j*i);
+	}
 }
