@@ -6,15 +6,18 @@
 #include "Babudi.h"
 #include "BabudiDlg.h"
 #include "afxdialogex.h"
+#include "Emitter.h"
 #include <ppl.h>
 #include <iostream>
 #include <random>
+#include <thread>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
+/*
 using namespace concurrency;
-using namespace std;
+using namespace std;*/
 
 // CAboutDlg dialog used for App About
 
@@ -68,6 +71,7 @@ BEGIN_MESSAGE_MAP(CBabudiDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BTN_PLAY, &CBabudiDlg::OnBnClickedBtnPlay)
 	ON_BN_CLICKED(IDC_BTN_RUN, &CBabudiDlg::OnBnClickedBtnRun)
+	ON_BN_CLICKED(IDC_BTN_THREAD, &CBabudiDlg::OnBnClickedBtnThread)
 END_MESSAGE_MAP()
 
 
@@ -162,6 +166,7 @@ void CBabudiDlg::OnBnClickedBtnPlay()
 {
 	// TODO: Add your control notification handler code here
 	//main();
+	/*
 	const size_t N = 10;
 	int* a = new int[N];
 
@@ -169,11 +174,11 @@ void CBabudiDlg::OnBnClickedBtnPlay()
 		a[n] = n;
 	for (size_t n = N; n-- > 0;) // Reverse cycles are tricky for unsigned types.
 		TRACE(_T("%d \n"),a[n]);
-	delete[] a;
+	delete[] a;*/
 	//
-	parallel_for(size_t(0), size_t(50), [&](size_t i)
+	concurrency::parallel_for(size_t(0), size_t(50), [&](size_t i)
 	{
-		//TRACE(_T("%d\n"),i);
+		TRACE(_T("%d\n"),i);
 		GetRandom(i);
 	});
 	//cout << endl;
@@ -182,9 +187,11 @@ void CBabudiDlg::OnBnClickedBtnPlay()
 
 void CBabudiDlg::GetRandom(size_t i)
 {
-	for (size_t j=0;j<10;j++)
+	for (size_t j=0;j<100000;j++)
 	{
-		TRACE(_T("i=%d,j=%d\n"),i,j);
+		//(void)0;
+		//Sleep(1);
+		//TRACE(_T("i=%d,j=%d\n"),i,j);
 	}
 }
 
@@ -195,4 +202,22 @@ void CBabudiDlg::OnBnClickedBtnRun()
 	{
 		GetRandom(i);
 	}
+}
+
+
+void CBabudiDlg::OnBnClickedBtnThread()
+{
+	
+	//CEmitter emitter;
+
+	//
+	std::thread t((CEmitter())); //double parenthesis to avoid returning an object instead of a thread
+	//std::thread t = std::thread(CEmitter());
+	//std::thread t{CEmitter}; //compile error
+
+	t.detach();
+	TRACE(_T("stop at main thread"));
+
+
+
 }
