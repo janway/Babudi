@@ -37,4 +37,5 @@ public:
 	afx_msg void OnBnClickedBtnRun();
 	afx_msg void OnBnClickedBtnThread();
 	afx_msg void OnBnClickedBtnMisc();
+	afx_msg void OnBnClickedBtnGreet();
 };

@@ -15,6 +15,7 @@
 #include <deque>
 #include <algorithm>
 #include <time.h>
+#include "Greeting.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -77,6 +78,7 @@ BEGIN_MESSAGE_MAP(CBabudiDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BTN_RUN, &CBabudiDlg::OnBnClickedBtnRun)
 	ON_BN_CLICKED(IDC_BTN_THREAD, &CBabudiDlg::OnBnClickedBtnThread)
 	ON_BN_CLICKED(IDC_BTN_MISC, &CBabudiDlg::OnBnClickedBtnMisc)
+	ON_BN_CLICKED(IDC_BTN_GREET, &CBabudiDlg::OnBnClickedBtnGreet)
 END_MESSAGE_MAP()
 
 
@@ -208,8 +210,6 @@ void CBabudiDlg::OnBnClickedBtnRun()
 		GetRandom(i);
 	}
 }
-
-
 void CBabudiDlg::OnBnClickedBtnThread()
 {
 	
@@ -226,7 +226,31 @@ void CBabudiDlg::OnBnClickedBtnThread()
 
 
 }
+void CBabudiDlg::OnBnClickedBtnGreet()
+{
+	// TODO: Add your control notification handler code here
+	//CGreeting *g = new CGreeting(4);
+	//std::thread t(CGreeting("goodbye"));
+	//std::thread t(*g);
 
+
+	//std::thread t = std::thread(CGreeting(313));
+	//t.join();
+
+
+	//delete g;
+
+	CGreeting obj;
+	int x = 100;
+	std::thread t(&CGreeting::Call,&obj,x);
+	t.join();
+
+
+	//_crtBreakAlloc;
+	_CrtDumpMemoryLeaks();
+	///TRACE(_T("exit at main thread"));
+
+}
 
 void CBabudiDlg::OnBnClickedBtnMisc()
 {
@@ -268,3 +292,4 @@ void CBabudiDlg::OnBnClickedBtnMisc()
 
 
 }
+

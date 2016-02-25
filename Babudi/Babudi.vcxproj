@@ -104,6 +104,7 @@
     <ClInclude Include="Babudi.h" />
     <ClInclude Include="BabudiDlg.h" />
     <ClInclude Include="Emitter.h" />
+    <ClInclude Include="Greeting.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -112,6 +113,7 @@
     <ClCompile Include="Babudi.cpp" />
     <ClCompile Include="BabudiDlg.cpp" />
     <ClCompile Include="Emitter.cpp" />
+    <ClCompile Include="Greeting.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
