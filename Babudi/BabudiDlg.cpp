@@ -11,6 +11,10 @@
 #include <iostream>
 #include <random>
 #include <thread>
+#include <vector>
+#include <deque>
+#include <algorithm>
+#include <time.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -72,6 +76,7 @@ BEGIN_MESSAGE_MAP(CBabudiDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BTN_PLAY, &CBabudiDlg::OnBnClickedBtnPlay)
 	ON_BN_CLICKED(IDC_BTN_RUN, &CBabudiDlg::OnBnClickedBtnRun)
 	ON_BN_CLICKED(IDC_BTN_THREAD, &CBabudiDlg::OnBnClickedBtnThread)
+	ON_BN_CLICKED(IDC_BTN_MISC, &CBabudiDlg::OnBnClickedBtnMisc)
 END_MESSAGE_MAP()
 
 
@@ -218,6 +223,48 @@ void CBabudiDlg::OnBnClickedBtnThread()
 	t.detach();
 	TRACE(_T("stop at main thread"));
 
+
+
+}
+
+
+void CBabudiDlg::OnBnClickedBtnMisc()
+{
+	// TODO: Add your control notification handler code here
+	//AfxMessageBox(_T("test"),0);
+	TRACE("test\n");
+	std::vector<std::string> vec;
+	vec.push_back("test222");
+	vec.push_back("test223");
+	vec.push_back("test224");
+	for (auto s : vec) {
+		TRACE(CString(s.c_str()));
+		TRACE("test\n");
+	}
+	std::vector<int> vecI(10);
+	generate(vecI.begin(),vecI.end(),[] {
+		return std::rand()*100;
+	});
+	for (auto i : vecI) {
+		TRACE(_T("%d\n"),i);
+	}
+
+	time_t timer;
+	struct tm y2k = {0};
+	double seconds;
+
+	y2k.tm_hour = 0;   y2k.tm_min = 0; y2k.tm_sec = 0;
+	y2k.tm_year = 100; y2k.tm_mon = 0; y2k.tm_mday = 1;
+
+	//time(&timer);  /* get current time; same as: timer = time(NULL)  */
+	timer = time(NULL);
+
+	seconds = difftime(timer,mktime(&y2k));
+
+	TRACE("%.f seconds since January 1, 2000 in the current timezone", seconds);
+
+	/**/
+	// just test 22224999 
 
 
 }
