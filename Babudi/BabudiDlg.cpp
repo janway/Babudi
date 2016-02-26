@@ -247,7 +247,7 @@ void CBabudiDlg::OnBnClickedBtnGreet()
 
 
 	//_crtBreakAlloc;
-	_CrtDumpMemoryLeaks();
+	//_CrtDumpMemoryLeaks();
 	///TRACE(_T("exit at main thread"));
 
 }
